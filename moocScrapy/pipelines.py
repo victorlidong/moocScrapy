@@ -49,11 +49,9 @@ class DownLoad_M3U8(object):
     def __init__(self,m3u8_url,file_name):
         self.m3u8_url=m3u8_url
         self.file_name=file_name
-
-    def __post_init__(self):
         self.headers = {
             'User-Agent': 'Mozilla/5.0', }
-        self.threadpool = ThreadPoolExecutor(max_workers=10)
+        self.threadpool = ThreadPoolExecutor(max_workers=20)
         if not self.file_name:
             self.file_name = 'new.mp4'
 
@@ -76,9 +74,9 @@ class DownLoad_M3U8(object):
         ts_urls = self.get_ts_url()
         for index, ts_url in enumerate(ts_urls):
             print(ts_url)
-            self.download_single_ts([ts_url, str(index)+'.ts'])
-        #     self.threadpool.submit(self.download_single_ts, [ts_url, str(index)+'.ts'])
-        # self.threadpool.shutdown()
+            # self.download_single_ts([ts_url, str(index)+'.ts'])
+            self.threadpool.submit(self.download_single_ts, [ts_url, str(index)+'.ts'])
+        self.threadpool.shutdown()
 
     def run(self):
         self.download_all_ts()
