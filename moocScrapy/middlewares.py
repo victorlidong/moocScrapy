@@ -107,6 +107,7 @@ class MoocscrapyDownloaderMiddleware(object):
 
 class RandomUserAgent(object):
    def process_request(self, request, spider):
+       #TODO 使用随机agent可以提高效率
        request.headers['User-Agent'] = 'Mozilla/5.0'
        #print(request.headers)
 

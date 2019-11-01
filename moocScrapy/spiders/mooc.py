@@ -139,10 +139,10 @@ class MoocSpider(scrapy.Spider):
         # 检查是否有重名的（即已经下载过的）
         if os.path.exists(DOWNLOAD_UEL+'PDFs\\' + name + '.pdf'):
             print(name + "------------->已下载")
-            return
+            return (None,None)
         if os.path.exists('Videos\\' + name + '.mp4'):
             print(name + "------------->已下载")
-            return
+            return (None,None)
 
         #获取video的下载链接
         signature_data_url="https://www.icourse163.org/web/j/resourceRpcBean.getResourceToken.rpc?csrfKey=1cd5127f309e40a1a0c78abce8234635"
@@ -203,10 +203,10 @@ class MoocSpider(scrapy.Spider):
         # 检查是否有重名的（即已经下载过的）
         if os.path.exists(DOWNLOAD_UEL+'PDFs\\' + name + '.pdf'):
             print(name + "------------->已下载")
-            return
+            return None
         if os.path.exists(DOWNLOAD_UEL+'Videos\\' + name + '.mp4'):
             print(name + "------------->已下载")
-            return
+            return None
         post_data = {
             'callCount': '1',
             'scriptSessionId': '${scriptSessionId}190',

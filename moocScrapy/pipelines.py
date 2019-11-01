@@ -77,7 +77,7 @@ class DownLoad_M3U8(object):
         for index, ts_url in enumerate(ts_urls):
             print(ts_url)
             self.download_single_ts([ts_url, str(index)+'.ts'])
-        #     self.threadpool.submit(self.download_single_ts, [ts_url, f'{index}.ts'])
+        #     self.threadpool.submit(self.download_single_ts, [ts_url, str(index)+'.ts'])
         # self.threadpool.shutdown()
 
     def run(self):
