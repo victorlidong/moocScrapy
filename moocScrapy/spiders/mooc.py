@@ -39,13 +39,29 @@ class MoocSpider(scrapy.Spider):
             c_item['course_introduction'].remove('')
 
 
-        teacher_pattern_compile = re.compile(r'chiefLector = {([\s\S]*?)}')
+        teacher_pattern_compile = re.compile(r'chiefLector = {([\s\S]*?)}')#主要授课教师
         teacher_set = re.findall(teacher_pattern_compile,context)
         teacher_set[0]=teacher_set[0].replace('\n','').replace(' ','')
         teacher_name_compile=re.compile(r'lectorName:"(.*?)"')
         teacher_lectorTitle_compile=re.compile(r'lectorTitle:"(.*?)"')
+
         teacher_name=re.findall( teacher_name_compile,teacher_set[0])[0]
         teacher_lectorTitle=re.findall(teacher_lectorTitle_compile,teacher_set[0])[0]
+        other_teacher_pattern_compile = re.compile(r'staffLectors = \[([\s\S]*?)\]')  # 其他授课教师
+        other_teacher_set=re.findall(other_teacher_pattern_compile,context)
+        other_teacher_info_set=[]
+        if len(other_teacher_set)>0 and other_teacher_set[0] != '\n':
+            other_teacher_set[0]=other_teacher_set[0].replace('\n','').replace(' ','')
+            other_teacher_info_pattern=re.compile(r'lectorName:"(.*?)",lectorTitle:"(.*?)"')
+            other_teacher_info_set=re.findall(other_teacher_info_pattern,other_teacher_set[0])
+            print(other_teacher_info_set)
+
+        tmplist=[]
+        for info in other_teacher_info_set:
+            tmpdict=dict([('lectorName',info[0]),('lectorTitle',info[1])])
+            tmplist.append(tmpdict)
+        c_item['course_other_teacher']=tmplist
+        #TODO 需要增加错误判断，没有考虑正则匹配失败的情况
         c_item['course_teacher_title']=teacher_lectorTitle
         c_item['course_teacher']=teacher_name
         collage_pattern_compile=re.compile(r'.schoolDto = {([\s\S]*?)}')
@@ -62,10 +78,12 @@ class MoocSpider(scrapy.Spider):
         c_item['course_url'] = self.infor_page_url + self.course
         # 将item转换字典
         item_dict = dict(c_item)
-        course_json=json.dumps(item_dict,ensure_ascii=False)
         with open(DOWNLOAD_UEL + '课程信息.json', 'w',encoding='utf-8') as file:
-            json.dump(course_json, file,ensure_ascii=False)
-        print(course_json)
+            json.dump(item_dict, file,ensure_ascii=False)
+        # with open(DOWNLOAD_UEL + '课程信息.json', 'r',encoding='utf-8') as file:
+        #     pop_data = json.load(file)
+        print(item_dict)
+
 
     def parse(self, response):
 

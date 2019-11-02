@@ -9,7 +9,7 @@
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 #course.config
-COURSE_ID="UIBE-1205987812"
+COURSE_ID="SCU-1003253003"
 VIDEO_TYPE="a"
 #download.url
 DOWNLOAD_UEL=""

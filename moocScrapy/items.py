@@ -35,4 +35,5 @@ class CourseItem(scrapy.Item):
     course_title=scrapy.Field()
     course_collage=scrapy.Field()
     course_url=scrapy.Field()
+    course_other_teacher=scrapy.Field()
     pass
