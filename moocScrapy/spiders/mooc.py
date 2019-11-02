@@ -247,17 +247,6 @@ class MoocSpider(scrapy.Spider):
         yield item
 
 
-        # quality=0#视频质量
-        # video_download_dict=video_link[quality]
-        # if video_download_dict['format']=='hls':#hls格式视频
-        #     file_name = 'Videos//'+name+'.mp4'
-        #     M3U8 = DownLoad_M3U8(video_download_dict['videoUrl'], file_name)
-        #     M3U8.run()
-        # else:#mp4格式则普通下载
-        #     urllib.request.urlretrieve(video_download_dict['videoUrl'], 'Videos\\' + name + '.mp4')
-
-
-
     def get_post_data(self,single_content, name, *args):
 
         # 检查文件命名，防止网站资源有特殊字符本地无法保存
