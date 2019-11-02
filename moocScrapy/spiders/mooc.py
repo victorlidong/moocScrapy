@@ -22,20 +22,50 @@ class MoocSpider(scrapy.Spider):
     def start_requests(self):
         base_infor_url = self.infor_page_url + self.course
         yield scrapy.Request(url=base_infor_url, dont_filter=True, callback=self.infor_parse)
+
+
         tmp_url=self.course_page_url+self.course
         yield scrapy.Request(url=tmp_url,dont_filter=True,callback=self.parse)
 
     def infor_parse(self,response):
+        context = response.text
+        #使用正则表达式提取
         c_item = CourseItem()
         c_item['course_introduction'] = response.xpath('.//div[@id="content-section"]/div[@class="category-content j-cover-overflow"][1]/div[@class="f-richEditorText"]/p//text()').extract()
-        c_item['course_teacher'] = response.xpath('.//div[@class="m-teachers_teacher-list"]/div[@class="m-teachers_teacher-list_wrap height-auto"]//h3//text()').extract()
-        print(c_item['course_teacher'])
-        c_item['course_teacher_title'] = response.xpath('.//div[@class="m-teachers_teacher-list"]/div[@class="m-teachers_teacher-list_wrap height-auto"]//p//text()').extract()
-        c_item['course_title'] = response.xpath('.//span[@class="course-title f-ib f-vam"]//text()').extract()
-        c_item['course_collage'] = response.xpath('.//div[@id="j-teacher"]/div/a/@data-label//text()').extract()
+        #去除空格和\xa0
+        for index,introduction in enumerate(c_item['course_introduction']):
+            c_item['course_introduction'][index]=introduction.replace(u'\xa0', u' ').lstrip()
+        while '' in c_item['course_introduction']:
+            c_item['course_introduction'].remove('')
+
+
+        teacher_pattern_compile = re.compile(r'chiefLector = {([\s\S]*?)}')
+        teacher_set = re.findall(teacher_pattern_compile,context)
+        teacher_set[0]=teacher_set[0].replace('\n','').replace(' ','')
+        teacher_name_compile=re.compile(r'lectorName:"(.*?)"')
+        teacher_lectorTitle_compile=re.compile(r'lectorTitle:"(.*?)"')
+        teacher_name=re.findall( teacher_name_compile,teacher_set[0])[0]
+        teacher_lectorTitle=re.findall(teacher_lectorTitle_compile,teacher_set[0])[0]
+        c_item['course_teacher_title']=teacher_lectorTitle
+        c_item['course_teacher']=teacher_name
+        collage_pattern_compile=re.compile(r'.schoolDto = {([\s\S]*?)}')
+        collage_set=re.findall(collage_pattern_compile,context)
+        collage_set[0] = collage_set[0].replace('\n', '').replace(' ', '')
+        collage_name=re.findall(r'name:"(.*?)"',collage_set[0])[0]
+        c_item['course_collage']=collage_name
+
+        # c_item['course_teacher'] = response.xpath('.//div[@class="m-teachers_teacher-list"]/div[@class="m-teachers_teacher-list_wrap height-auto"]//h3//text()').extract()
+        # print(c_item['course_teacher'])
+        # c_item['course_teacher_title'] = response.xpath('.//div[@class="m-teachers_teacher-list"]/div[@class="m-teachers_teacher-list_wrap height-auto"]//p//text()').extract()
+        # c_item['course_collage'] = response.xpath('.//div[@id="j-teacher"]/div/a/@data-label//text()').extract()
+        c_item['course_title'] = response.xpath('.//span[@class="course-title f-ib f-vam"]//text()').extract()[0]
         c_item['course_url'] = self.infor_page_url + self.course
-
-
+        # 将item转换字典
+        item_dict = dict(c_item)
+        course_json=json.dumps(item_dict,ensure_ascii=False)
+        with open(DOWNLOAD_UEL + '课程信息.json', 'w',encoding='utf-8') as file:
+            json.dump(course_json, file,ensure_ascii=False)
+        print(course_json)
 
     def parse(self, response):
 

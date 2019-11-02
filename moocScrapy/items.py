@@ -26,3 +26,13 @@ class MoocscrapyItem(scrapy.Item):
     video_name=scrapy.Field()
     video_id=scrapy.Field()
     pass
+
+class CourseItem(scrapy.Item):
+
+    course_introduction=scrapy.Field()
+    course_teacher=scrapy.Field()
+    course_teacher_title=scrapy.Field()
+    course_title=scrapy.Field()
+    course_collage=scrapy.Field()
+    course_url=scrapy.Field()
+    pass
