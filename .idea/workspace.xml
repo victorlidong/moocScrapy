@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="43fff0c0-4d8a-455a-a2ea-bb717f7fd69f" name="Default" comment="可以识别多个教师的课程">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
+    <list default="true" id="43fff0c0-4d8a-455a-a2ea-bb717f7fd69f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/moocScrapy/items.py" afterPath="$PROJECT_DIR$/moocScrapy/items.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/moocScrapy/settings.py" afterPath="$PROJECT_DIR$/moocScrapy/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/moocScrapy/spiders/mooc.py" afterPath="$PROJECT_DIR$/moocScrapy/spiders/mooc.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/目录结构.txt" afterPath="$PROJECT_DIR$/目录结构.txt" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -534,7 +529,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572684082091</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="可以识别多个教师的课程">
+      <created>1572687233911</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1572687233911</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
