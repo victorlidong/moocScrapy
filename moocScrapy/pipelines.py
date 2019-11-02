@@ -30,6 +30,8 @@ class MoocscrapyPipeline(object):
             print("download video")
             if not os.path.isdir(DOWNLOAD_UEL+'Videos'):
                 os.mkdir(DOWNLOAD_UEL + r'Videos')
+            if not os.path.isdir(DOWNLOAD_UEL+'Videos\\temp'):
+                os.mkdir(DOWNLOAD_UEL + r'Videos\\temp')
             if item['srt_url']:  # 如果视频有字幕
                 urllib.request.urlretrieve(item['srt_url'], DOWNLOAD_UEL+'Videos\\'+item['video_name']+ '.srt')  # 字幕下载
             if item['video_type']=='hls':#hls格式视频
@@ -67,7 +69,7 @@ class DownLoad_M3U8(object):
     def download_single_ts(self, urlinfo):
         url, ts_name = urlinfo
         res = requests.get(url)
-        with open(ts_name, 'wb') as fp:
+        with open(DOWNLOAD_UEL+'Videos\\temp\\'+ts_name, 'wb') as fp:
             fp.write(res.content)
 
     def download_all_ts(self):
@@ -80,7 +82,7 @@ class DownLoad_M3U8(object):
 
     def run(self):
         self.download_all_ts()
-        ts_path = '*.ts'
+        ts_path = DOWNLOAD_UEL+'Videos\\temp\\'+'*.ts'
         with open(self.file_name, 'wb') as fn:
             for ts in natsorted(iglob(ts_path)):
                 with open(ts, 'rb') as ft:

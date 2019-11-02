@@ -13,14 +13,29 @@ class MoocSpider(scrapy.Spider):
     allowed_domains = []  # 定义爬虫域
 
     def __init__(self):
+       self.infor_page_url = 'http://www.icourse163.org/course/'
        self.course_page_url = 'http://www.icourse163.org/learn/'
        self.SOURCE_INFO_URL = 'http://www.icourse163.org/dwr/call/plaincall/CourseBean.getMocTermDto.dwr'
        self.SOURCE_RESOURCE_URL = 'http://www.icourse163.org/dwr/call/plaincall/CourseBean.getLessonUnitLearnVo.dwr'
        self.course=COURSE_ID
 
     def start_requests(self):
+        base_infor_url = self.infor_page_url + self.course
+        yield scrapy.Request(url=base_infor_url, dont_filter=True, callback=self.infor_parse)
         tmp_url=self.course_page_url+self.course
         yield scrapy.Request(url=tmp_url,dont_filter=True,callback=self.parse)
+
+    def infor_parse(self,response):
+        c_item = CourseItem()
+        c_item['course_introduction'] = response.xpath('.//div[@id="content-section"]/div[@class="category-content j-cover-overflow"][1]/div[@class="f-richEditorText"]/p//text()').extract()
+        c_item['course_teacher'] = response.xpath('.//div[@class="m-teachers_teacher-list"]/div[@class="m-teachers_teacher-list_wrap height-auto"]//h3//text()').extract()
+        print(c_item['course_teacher'])
+        c_item['course_teacher_title'] = response.xpath('.//div[@class="m-teachers_teacher-list"]/div[@class="m-teachers_teacher-list_wrap height-auto"]//p//text()').extract()
+        c_item['course_title'] = response.xpath('.//span[@class="course-title f-ib f-vam"]//text()').extract()
+        c_item['course_collage'] = response.xpath('.//div[@id="j-teacher"]/div/a/@data-label//text()').extract()
+        c_item['course_url'] = self.infor_page_url + self.course
+
+
 
     def parse(self, response):
 
@@ -248,8 +263,10 @@ class MoocSpider(scrapy.Spider):
         param = {
             "course_title": basic_set.group(1),
             "course_collage": basic_set.group(2),
-            "course_id": re.search(id_pattern_compile,
-                                   course_page.text).group(1)
+            "course_id": re.search(id_pattern_compile, course_page.text).group(1),
+
+
+
 
         }
         return param
