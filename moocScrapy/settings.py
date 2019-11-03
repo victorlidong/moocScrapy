@@ -9,11 +9,21 @@
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 #course.config
-COURSE_ID="SCU-1003253003"
-#COURSE_ID="UIBE-1205987812"
+#COURSE_ID="SCU-1003253003"   #吃货的营养学修养
+#COURSE_ID="UIBE-1205987812"   #投资学
 VIDEO_TYPE="a"
 #download.url
 DOWNLOAD_UEL=""
+
+print("输入你想爬取的课程链接：")
+course_url = input()
+COURSE_ID = ''
+for i in range(len(course_url)):
+    if course_url[len(course_url)-i-1] == '/':
+        COURSE_ID = course_url[-i:]
+        break
+
+print("COURSE_ID =",COURSE_ID)
 
 
 DOWNLOAD_DELAY = 0
