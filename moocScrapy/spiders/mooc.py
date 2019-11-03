@@ -28,6 +28,8 @@ class MoocSpider(scrapy.Spider):
         yield scrapy.Request(url=tmp_url,dont_filter=True,callback=self.parse)
 
     def infor_parse(self,response):
+        global DOWNLOAD_UEL
+        print('课程基本信息开始提取')
         context = response.text
         #使用正则表达式提取
         c_item = CourseItem()
@@ -78,11 +80,22 @@ class MoocSpider(scrapy.Spider):
         c_item['course_url'] = self.infor_page_url + self.course
         # 将item转换字典
         item_dict = dict(c_item)
-        with open(DOWNLOAD_UEL + '课程信息.json', 'w',encoding='utf-8') as file:
+
+        if not os.path.isdir('data'):         #创建课程文件夹
+            os.mkdir('data')
+        if c_item['course_title']:
+            DOWNLOAD_UEL = 'data\\' + c_item['course_title']
+            if not os.path.isdir(DOWNLOAD_UEL):
+                os.mkdir(DOWNLOAD_UEL)
+            DOWNLOAD_UEL = DOWNLOAD_UEL + '\\'
+
+
+        with open(DOWNLOAD_UEL+ '课程信息.json', 'w',encoding='utf-8') as file:
             json.dump(item_dict, file,ensure_ascii=False)
         # with open(DOWNLOAD_UEL + '课程信息.json', 'r',encoding='utf-8') as file:
         #     pop_data = json.load(file)
         print(item_dict)
+        print('课程基本信息提取结束，存放地址为：'+ DOWNLOAD_UEL+ '课程信息.json')
 
 
     def parse(self, response):
@@ -114,6 +127,8 @@ class MoocSpider(scrapy.Spider):
             r'homeworks=.*?;.+id=(\d+).*?name="(.*?)";')
         # 查找所有一级目录id和name
         chapter_set = re.findall(chapter_pattern_compile, context)
+        DOWNLOAD_UEL = 'data\\' + meta_data["course_title"] + '\\'
+        print('目录信息开始提取，存放地址为：' + DOWNLOAD_UEL + '目录结构.txt')
         with open(DOWNLOAD_UEL+'目录结构.txt', 'w', encoding='utf-8') as file:
             # 遍历所有一级目录id和name并写入目录
             for index, single_chaper in enumerate(chapter_set):
@@ -191,6 +206,8 @@ class MoocSpider(scrapy.Spider):
                             yield scrapy.FormRequest(self.SOURCE_RESOURCE_URL, dont_filter=True,formdata=post_data, meta=param,
                                                  callback=self.get_pdf_download_url)
 
+        print('目录信息提取结束，存放地址为：' + DOWNLOAD_UEL + '目录结构.txt')
+
    
 
 
@@ -203,7 +220,7 @@ class MoocSpider(scrapy.Spider):
         if os.path.exists(DOWNLOAD_UEL+'PDFs\\' + name + '.pdf'):
             print(name + "------------->已下载")
             return (None,None)
-        if os.path.exists('Videos\\' + name + '.mp4'):
+        if os.path.exists(DOWNLOAD_UEL+'Videos\\' + name + '.mp4'):
             print(name + "------------->已下载")
             return (None,None)
 

@@ -18,9 +18,16 @@ from concurrent.futures import ThreadPoolExecutor
 from moocScrapy.settings import DOWNLOAD_UEL
 class MoocscrapyPipeline(object):
     def process_item(self, item, spider):
+        global DOWNLOAD_UEL
+        if not os.path.isdir('data'):
+            os.mkdir('data')
+        if item["course_title"]:
+            DOWNLOAD_UEL = 'data\\' + item["course_title"]
+            if not os.path.isdir(DOWNLOAD_UEL):
+                os.mkdir(DOWNLOAD_UEL)
+            DOWNLOAD_UEL = DOWNLOAD_UEL + '\\'
         if item["pdf_url"]:
             print("download pdf")
-
             pdf_file = requests.get(item["pdf_url"])
             if not os.path.isdir(DOWNLOAD_UEL + 'PDFs'):
                 os.mkdir(DOWNLOAD_UEL + r'PDFs')
