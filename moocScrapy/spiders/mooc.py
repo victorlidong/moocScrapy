@@ -84,7 +84,7 @@ class MoocSpider(scrapy.Spider):
         if not os.path.isdir('data'):         #创建课程文件夹
             os.mkdir('data')
         if c_item['course_title']:
-            DOWNLOAD_UEL = 'data\\' + c_item['course_title']
+            DOWNLOAD_UEL = DOWNLOAD_UEL + 'data\\' + c_item['course_title']
             if not os.path.isdir(DOWNLOAD_UEL):
                 os.mkdir(DOWNLOAD_UEL)
             DOWNLOAD_UEL = DOWNLOAD_UEL + '\\'

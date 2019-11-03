@@ -22,7 +22,7 @@ class MoocscrapyPipeline(object):
         if not os.path.isdir('data'):
             os.mkdir('data')
         if item["course_title"]:
-            DOWNLOAD_UEL = 'data\\' + item["course_title"]
+            DOWNLOAD_UEL = DOWNLOAD_UEL + 'data\\' + item["course_title"]
             if not os.path.isdir(DOWNLOAD_UEL):
                 os.mkdir(DOWNLOAD_UEL)
             DOWNLOAD_UEL = DOWNLOAD_UEL + '\\'
