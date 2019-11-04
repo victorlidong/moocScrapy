@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="43fff0c0-4d8a-455a-a2ea-bb717f7fd69f" name="Default" comment="更改下载路径，支持相对与绝对">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/moocScrapy.iml" afterPath="$PROJECT_DIR$/.idea/moocScrapy.iml" />
+    <list default="true" id="43fff0c0-4d8a-455a-a2ea-bb717f7fd69f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/moocScrapy/pipelines.py" afterPath="$PROJECT_DIR$/moocScrapy/pipelines.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/moocScrapy/settings.py" afterPath="$PROJECT_DIR$/moocScrapy/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/moocScrapy/spiders/mooc.py" afterPath="$PROJECT_DIR$/moocScrapy/spiders/mooc.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -674,7 +669,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572687372606</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="更改下载路径，支持相对与绝对">
+      <created>1572845312764</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1572845312764</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -722,7 +724,8 @@
     <MESSAGE value="更改gitignore" />
     <MESSAGE value="添加课程信息保存json功能" />
     <MESSAGE value="可以识别多个教师的课程" />
-    <option name="LAST_COMMIT_MESSAGE" value="可以识别多个教师的课程" />
+    <MESSAGE value="更改下载路径，支持相对与绝对" />
+    <option name="LAST_COMMIT_MESSAGE" value="更改下载路径，支持相对与绝对" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
