@@ -8,6 +8,8 @@
 from scrapy import signals
 from my_fake_useragent import UserAgent
 import os
+
+
 class MoocscrapySpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the spider middleware does not modify the
@@ -103,11 +105,8 @@ class MoocscrapyDownloaderMiddleware(object):
         spider.logger.info('Spider opened: %s' % spider.name)
 
 
-
-
 class RandomUserAgent(object):
-   def process_request(self, request, spider):
-       #TODO 使用随机agent可以提高效率
-       request.headers['User-Agent'] = 'Mozilla/5.0'
-       #print(request.headers)
-
+    def process_request(self, request, spider):
+        # TODO 使用随机agent可以提高效率
+        request.headers['User-Agent'] = 'Mozilla/5.0'
+        # print(request.headers)

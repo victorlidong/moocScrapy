@@ -16,9 +16,11 @@ from urllib.parse import urljoin
 from dataclasses import dataclass
 from concurrent.futures import ThreadPoolExecutor
 from moocScrapy.spiders.mooc import *
+
+
 class MoocscrapyPipeline(object):
     def process_item(self, item, spider):
-        tmp_download_url=getDownloadUrl()
+        tmp_download_url = getDownloadUrl()
 
         if item["pdf_url"]:
             print("download pdf")
@@ -29,29 +31,28 @@ class MoocscrapyPipeline(object):
                 file.write(pdf_file.content)
         if item["video_url"]:
             print("download video")
-            if not os.path.isdir(tmp_download_url+'Videos'):
+            if not os.path.isdir(tmp_download_url + 'Videos'):
                 os.mkdir(tmp_download_url + r'Videos')
-            if not os.path.isdir(tmp_download_url+'Videos\\temp'):
+            if not os.path.isdir(tmp_download_url + 'Videos\\temp'):
                 os.mkdir(tmp_download_url + r'Videos\\temp')
             if item['srt_url']:  # 如果视频有字幕
-                urllib.request.urlretrieve(item['srt_url'], tmp_download_url+'Videos\\'+item['video_name']+ '.srt')  # 字幕下载
-            if item['video_type']=='hls':#hls格式视频
-                file_name = tmp_download_url+'Videos\\'+item['video_name']+'.mp4'
-                file_url=item["video_url"]
+                urllib.request.urlretrieve(item['srt_url'],
+                                           tmp_download_url + 'Videos\\' + item['video_name'] + '.srt')  # 字幕下载
+            if item['video_type'] == 'hls':  # hls格式视频
+                file_name = tmp_download_url + 'Videos\\' + item['video_name'] + '.mp4'
+                file_url = item["video_url"]
                 M3U8 = DownLoad_M3U8(file_url, file_name)
                 M3U8.run()
-            else:#mp4格式则普通下载
-                urllib.request.urlretrieve(item['video_url'], tmp_download_url+'Videos\\'+item['video_name']+'.mp4')
+            else:  # mp4格式则普通下载
+                urllib.request.urlretrieve(item['video_url'],
+                                           tmp_download_url + 'Videos\\' + item['video_name'] + '.mp4')
         return item
 
 
-
-
 class DownLoad_M3U8(object):
-
-    def __init__(self,m3u8_url,file_name):
-        self.m3u8_url=m3u8_url
-        self.file_name=file_name
+    def __init__(self, m3u8_url, file_name):
+        self.m3u8_url = m3u8_url
+        self.file_name = file_name
         self.headers = {
             'User-Agent': 'Mozilla/5.0', }
         self.threadpool = ThreadPoolExecutor(max_workers=20)
@@ -62,7 +63,7 @@ class DownLoad_M3U8(object):
         m3u8_obj = m3u8.load(self.m3u8_url)
         base_uri = m3u8_obj.base_uri
 
-        ts_url=[]
+        ts_url = []
         for seg in m3u8_obj.segments:
             ts_url.append(urljoin(base_uri, seg.uri))
         return ts_url
@@ -70,8 +71,8 @@ class DownLoad_M3U8(object):
     def download_single_ts(self, urlinfo):
         url, ts_name = urlinfo
         res = requests.get(url)
-        tmp_download_url=getDownloadUrl()
-        with open(tmp_download_url+'Videos\\temp\\'+ts_name, 'wb') as fp:
+        tmp_download_url = getDownloadUrl()
+        with open(tmp_download_url + 'Videos\\temp\\' + ts_name, 'wb') as fp:
             fp.write(res.content)
 
     def download_all_ts(self):
@@ -79,13 +80,13 @@ class DownLoad_M3U8(object):
         for index, ts_url in enumerate(ts_urls):
             print(ts_url)
             # self.download_single_ts([ts_url, str(index)+'.ts'])
-            self.threadpool.submit(self.download_single_ts, [ts_url, str(index)+'.ts'])
+            self.threadpool.submit(self.download_single_ts, [ts_url, str(index) + '.ts'])
         self.threadpool.shutdown()
 
     def run(self):
         self.download_all_ts()
-        tmp_download_url=getDownloadUrl()
-        ts_path = tmp_download_url+'Videos\\temp\\'+'*.ts'
+        tmp_download_url = getDownloadUrl()
+        ts_path = tmp_download_url + 'Videos\\temp\\' + '*.ts'
         with open(self.file_name, 'wb') as fn:
             for ts in natsorted(iglob(ts_path)):
                 with open(ts, 'rb') as ft:
