@@ -15,39 +15,33 @@ from natsort import natsorted
 from urllib.parse import urljoin
 from dataclasses import dataclass
 from concurrent.futures import ThreadPoolExecutor
-from moocScrapy.settings import DOWNLOAD_UEL
+from moocScrapy.spiders.mooc import *
 class MoocscrapyPipeline(object):
     def process_item(self, item, spider):
-        global DOWNLOAD_UEL
-        if not os.path.isdir('data'):
-            os.mkdir('data')
-        if item["course_title"]:
-            DOWNLOAD_UEL = DOWNLOAD_UEL + 'data\\' + item["course_title"]
-            if not os.path.isdir(DOWNLOAD_UEL):
-                os.mkdir(DOWNLOAD_UEL)
-            DOWNLOAD_UEL = DOWNLOAD_UEL + '\\'
+        tmp_download_url=getDownloadUrl()
+
         if item["pdf_url"]:
             print("download pdf")
             pdf_file = requests.get(item["pdf_url"])
-            if not os.path.isdir(DOWNLOAD_UEL + 'PDFs'):
-                os.mkdir(DOWNLOAD_UEL + r'PDFs')
-            with open(DOWNLOAD_UEL + 'PDFs\\' + item['pdf_name'] + '.pdf', 'wb') as file:
+            if not os.path.isdir(tmp_download_url + 'PDFs'):
+                os.mkdir(tmp_download_url + r'PDFs')
+            with open(tmp_download_url + 'PDFs\\' + item['pdf_name'] + '.pdf', 'wb') as file:
                 file.write(pdf_file.content)
         if item["video_url"]:
             print("download video")
-            if not os.path.isdir(DOWNLOAD_UEL+'Videos'):
-                os.mkdir(DOWNLOAD_UEL + r'Videos')
-            if not os.path.isdir(DOWNLOAD_UEL+'Videos\\temp'):
-                os.mkdir(DOWNLOAD_UEL + r'Videos\\temp')
+            if not os.path.isdir(tmp_download_url+'Videos'):
+                os.mkdir(tmp_download_url + r'Videos')
+            if not os.path.isdir(tmp_download_url+'Videos\\temp'):
+                os.mkdir(tmp_download_url + r'Videos\\temp')
             if item['srt_url']:  # 如果视频有字幕
-                urllib.request.urlretrieve(item['srt_url'], DOWNLOAD_UEL+'Videos\\'+item['video_name']+ '.srt')  # 字幕下载
+                urllib.request.urlretrieve(item['srt_url'], tmp_download_url+'Videos\\'+item['video_name']+ '.srt')  # 字幕下载
             if item['video_type']=='hls':#hls格式视频
-                file_name = DOWNLOAD_UEL+'Videos\\'+item['video_name']+'.mp4'
+                file_name = tmp_download_url+'Videos\\'+item['video_name']+'.mp4'
                 file_url=item["video_url"]
                 M3U8 = DownLoad_M3U8(file_url, file_name)
                 M3U8.run()
             else:#mp4格式则普通下载
-                urllib.request.urlretrieve(item['video_url'], DOWNLOAD_UEL+'Videos\\'+item['video_name']+'.mp4')
+                urllib.request.urlretrieve(item['video_url'], tmp_download_url+'Videos\\'+item['video_name']+'.mp4')
         return item
 
 
@@ -76,7 +70,8 @@ class DownLoad_M3U8(object):
     def download_single_ts(self, urlinfo):
         url, ts_name = urlinfo
         res = requests.get(url)
-        with open(DOWNLOAD_UEL+'Videos\\temp\\'+ts_name, 'wb') as fp:
+        tmp_download_url=getDownloadUrl()
+        with open(tmp_download_url+'Videos\\temp\\'+ts_name, 'wb') as fp:
             fp.write(res.content)
 
     def download_all_ts(self):
@@ -89,7 +84,8 @@ class DownLoad_M3U8(object):
 
     def run(self):
         self.download_all_ts()
-        ts_path = DOWNLOAD_UEL+'Videos\\temp\\'+'*.ts'
+        tmp_download_url=getDownloadUrl()
+        ts_path = tmp_download_url+'Videos\\temp\\'+'*.ts'
         with open(self.file_name, 'wb') as fn:
             for ts in natsorted(iglob(ts_path)):
                 with open(ts, 'rb') as ft:

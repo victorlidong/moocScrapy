@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 import scrapy
+import moocScrapy.settings
 from moocScrapy.settings import *
 from moocScrapy.items import *
-from scrapy import Request
-import urllib.request
 import re
 import os
 import json
@@ -21,14 +20,30 @@ class MoocSpider(scrapy.Spider):
 
     def start_requests(self):
         base_infor_url = self.infor_page_url + self.course
+
+        #获取课程名称并且新建文件夹
+        content=requests.get(base_infor_url).text
+        course_name_compile=re.compile(r'class="course-title f-ib f-vam">(.*?)<')
+        course_name=re.findall(course_name_compile,content)[0]
+        tmp_download_url=getDownloadUrl()
+
+        if tmp_download_url.endswith('\\')==False and tmp_download_url!='':
+            tmp_download_url=tmp_download_url+'\\'
+        course_name=re.sub(r'[\\|\/|:|\*|\?|：]','',course_name)
+        tmp_download_url = tmp_download_url + 'data\\' + course_name+'\\'
+
+        # if os.path.islink(tmp_download_url)==False:
+        #     print("输入路径错误")
+        #     return
+        if not os.path.isdir(tmp_download_url):
+            os.makedirs(tmp_download_url)
+        setDownloadUrl(tmp_download_url)
+
         yield scrapy.Request(url=base_infor_url, dont_filter=True, callback=self.infor_parse)
-
-
         tmp_url=self.course_page_url+self.course
         yield scrapy.Request(url=tmp_url,dont_filter=True,callback=self.parse)
 
     def infor_parse(self,response):
-        global DOWNLOAD_UEL
         print('课程基本信息开始提取')
         context = response.text
         #使用正则表达式提取
@@ -40,8 +55,7 @@ class MoocSpider(scrapy.Spider):
         while '' in c_item['course_introduction']:
             c_item['course_introduction'].remove('')
 
-
-        teacher_pattern_compile = re.compile(r'chiefLector = {([\s\S]*?)}')#主要授课教师
+        teacher_pattern_compile = re.compile(r'chiefLector = \{([\s\S]*?)\}')#主要授课教师
         teacher_set = re.findall(teacher_pattern_compile,context)
         teacher_set[0]=teacher_set[0].replace('\n','').replace(' ','')
         teacher_name_compile=re.compile(r'lectorName:"(.*?)"')
@@ -66,36 +80,22 @@ class MoocSpider(scrapy.Spider):
         #TODO 需要增加错误判断，没有考虑正则匹配失败的情况
         c_item['course_teacher_title']=teacher_lectorTitle
         c_item['course_teacher']=teacher_name
-        collage_pattern_compile=re.compile(r'.schoolDto = {([\s\S]*?)}')
+        collage_pattern_compile=re.compile(r'.schoolDto = \{([\s\S]*?)\}')
         collage_set=re.findall(collage_pattern_compile,context)
         collage_set[0] = collage_set[0].replace('\n', '').replace(' ', '')
         collage_name=re.findall(r'name:"(.*?)"',collage_set[0])[0]
         c_item['course_collage']=collage_name
-
-        # c_item['course_teacher'] = response.xpath('.//div[@class="m-teachers_teacher-list"]/div[@class="m-teachers_teacher-list_wrap height-auto"]//h3//text()').extract()
-        # print(c_item['course_teacher'])
-        # c_item['course_teacher_title'] = response.xpath('.//div[@class="m-teachers_teacher-list"]/div[@class="m-teachers_teacher-list_wrap height-auto"]//p//text()').extract()
-        # c_item['course_collage'] = response.xpath('.//div[@id="j-teacher"]/div/a/@data-label//text()').extract()
         c_item['course_title'] = response.xpath('.//span[@class="course-title f-ib f-vam"]//text()').extract()[0]
         c_item['course_url'] = self.infor_page_url + self.course
         # 将item转换字典
         item_dict = dict(c_item)
-
-        if not os.path.isdir('data'):         #创建课程文件夹
-            os.mkdir('data')
-        if c_item['course_title']:
-            DOWNLOAD_UEL = DOWNLOAD_UEL + 'data\\' + c_item['course_title']
-            if not os.path.isdir(DOWNLOAD_UEL):
-                os.mkdir(DOWNLOAD_UEL)
-            DOWNLOAD_UEL = DOWNLOAD_UEL + '\\'
-
-
-        with open(DOWNLOAD_UEL+ '课程信息.json', 'w',encoding='utf-8') as file:
+        tmp_download_url=getDownloadUrl()
+        with open(tmp_download_url+ '课程信息.json', 'w',encoding='utf-8') as file:
             json.dump(item_dict, file,ensure_ascii=False)
         # with open(DOWNLOAD_UEL + '课程信息.json', 'r',encoding='utf-8') as file:
         #     pop_data = json.load(file)
         print(item_dict)
-        print('课程基本信息提取结束，存放地址为：'+ DOWNLOAD_UEL+ '课程信息.json')
+        print('课程基本信息提取结束，存放地址为：'+ tmp_download_url+ '课程信息.json')
 
 
     def parse(self, response):
@@ -127,9 +127,11 @@ class MoocSpider(scrapy.Spider):
             r'homeworks=.*?;.+id=(\d+).*?name="(.*?)";')
         # 查找所有一级目录id和name
         chapter_set = re.findall(chapter_pattern_compile, context)
-        DOWNLOAD_UEL = 'data\\' + meta_data["course_title"] + '\\'
-        print('目录信息开始提取，存放地址为：' + DOWNLOAD_UEL + '目录结构.txt')
-        with open(DOWNLOAD_UEL+'目录结构.txt', 'w', encoding='utf-8') as file:
+
+
+        tmp_download_url=getDownloadUrl()
+        print('目录信息开始提取，存放地址为：' + tmp_download_url + '目录结构.txt')
+        with open(tmp_download_url+'目录结构.txt', 'w', encoding='utf-8') as file:
             # 遍历所有一级目录id和name并写入目录
             for index, single_chaper in enumerate(chapter_set):
                 file.write('%s    \n' % (single_chaper[1]))
@@ -206,7 +208,7 @@ class MoocSpider(scrapy.Spider):
                             yield scrapy.FormRequest(self.SOURCE_RESOURCE_URL, dont_filter=True,formdata=post_data, meta=param,
                                                  callback=self.get_pdf_download_url)
 
-        print('目录信息提取结束，存放地址为：' + DOWNLOAD_UEL + '目录结构.txt')
+        print('目录信息提取结束，存放地址为：' + tmp_download_url + '目录结构.txt')
 
    
 
@@ -217,10 +219,11 @@ class MoocSpider(scrapy.Spider):
         file_pattern_compile = re.compile(r'[\\/:\*\?"<>\|]')
         name = re.sub(file_pattern_compile, '', name)
         # 检查是否有重名的（即已经下载过的）
-        if os.path.exists(DOWNLOAD_UEL+'PDFs\\' + name + '.pdf'):
+        tmp_download_url = getDownloadUrl()
+        if os.path.exists(tmp_download_url+'PDFs\\' + name + '.pdf'):
             print(name + "------------->已下载")
             return (None,None)
-        if os.path.exists(DOWNLOAD_UEL+'Videos\\' + name + '.mp4'):
+        if os.path.exists(tmp_download_url+'Videos\\' + name + '.mp4'):
             print(name + "------------->已下载")
             return (None,None)
 
@@ -270,10 +273,11 @@ class MoocSpider(scrapy.Spider):
         file_pattern_compile = re.compile(r'[\\/:\*\?"<>\|]')
         name = re.sub(file_pattern_compile, '', name)
         # 检查是否有重名的（即已经下载过的）
-        if os.path.exists(DOWNLOAD_UEL+'PDFs\\' + name + '.pdf'):
+        tmp_download_url=getDownloadUrl()
+        if os.path.exists(tmp_download_url+'PDFs\\' + name + '.pdf'):
             print(name + "------------->已下载")
             return None
-        if os.path.exists(DOWNLOAD_UEL+'Videos\\' + name + '.mp4'):
+        if os.path.exists(tmp_download_url+'Videos\\' + name + '.mp4'):
             print(name + "------------->已下载")
             return None
         post_data = {

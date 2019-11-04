@@ -13,7 +13,14 @@
 #COURSE_ID="UIBE-1205987812"   #投资学
 VIDEO_TYPE="a"
 #download.url
-DOWNLOAD_UEL=""
+#DOWNLOAD_URL=r"tmp"
+print("保存路径：")
+DOWNLOAD_URL = input()
+def getDownloadUrl():
+    return DOWNLOAD_URL
+def setDownloadUrl(downloadurl):
+    global DOWNLOAD_URL
+    DOWNLOAD_URL=downloadurl
 
 print("输入你想爬取的课程链接：")
 course_url = input()
