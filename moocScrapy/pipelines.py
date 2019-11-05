@@ -3,17 +3,12 @@
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-import pymongo
 import urllib.request
-from scrapy.exceptions import DropItem
-import os
-import time
+
 import m3u8
-import requests
 from glob import iglob
 from natsort import natsorted
 from urllib.parse import urljoin
-from dataclasses import dataclass
 from concurrent.futures import ThreadPoolExecutor
 from moocScrapy.spiders.mooc import *
 
