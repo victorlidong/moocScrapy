@@ -174,7 +174,7 @@ class MoocSpider(scrapy.Spider):
                         item["single_lesson_id"] = single_lesson[0]
                         rename = re.sub(name_pattern_compile, '', single_video[3])
                         video_name = '%d.%d.%d [视频] %s' % (index + 1, sub_index + 1, video_index + 1, rename)
-                        file.write('　　[视频] %s \n' % (video_name))
+                        file.write('　　 %s \n' % (video_name))
                         item['video_name'] = video_name
                         (getMethod_url, video_id) = self.get_video_getMethod_url(single_video, video_name)
                         item['video_id'] = video_id
@@ -197,7 +197,7 @@ class MoocSpider(scrapy.Spider):
                         item["single_lesson_id"] = single_lesson[0]
                         rename = re.sub(name_pattern_compile, '', single_pdf[3])
                         pdf_name = '%d.%d.%d [文档] %s' % (index + 1, sub_index + 1, pdf_index + 1, rename)
-                        file.write('　　[文档] %s \n' % (pdf_name))
+                        file.write('　　 %s \n' % (pdf_name))
                         item['pdf_name'] = pdf_name
                         param = {
                             "type": single_pdf[1],
