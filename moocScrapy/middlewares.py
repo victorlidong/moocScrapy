@@ -6,8 +6,6 @@
 # https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
-from my_fake_useragent import UserAgent
-import os
 
 
 class MoocscrapySpiderMiddleware(object):

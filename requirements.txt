@@ -1,0 +1,4 @@
+requests==2.22.0
+Scrapy==1.7.4
+m3u8==0.5.1
+natsort==6.0.0

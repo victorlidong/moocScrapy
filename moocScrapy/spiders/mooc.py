@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-import scrapy
-import moocScrapy.settings
 from moocScrapy.settings import *
 from moocScrapy.items import *
 import re
@@ -174,7 +172,8 @@ class MoocSpider(scrapy.Spider):
                         item["single_lesson_id"] = single_lesson[0]
                         rename = re.sub(name_pattern_compile, '', single_video[3])
                         video_name = '%d.%d.%d [视频] %s' % (index + 1, sub_index + 1, video_index + 1, rename)
-                        file.write('　　 %s \n' % (video_name))
+                        lesson_video_url = self.course_page_url + self.course + r'#/learn/content?type=detail&id=' + single_lesson[0] + r'&cid=' + single_video[2]
+                        file.write('　　 %s   %s\n' % (video_name,lesson_video_url))
                         item['video_name'] = video_name
                         (getMethod_url, video_id) = self.get_video_getMethod_url(single_video, video_name)
                         item['video_id'] = video_id
@@ -197,7 +196,8 @@ class MoocSpider(scrapy.Spider):
                         item["single_lesson_id"] = single_lesson[0]
                         rename = re.sub(name_pattern_compile, '', single_pdf[3])
                         pdf_name = '%d.%d.%d [文档] %s' % (index + 1, sub_index + 1, pdf_index + 1, rename)
-                        file.write('　　 %s \n' % (pdf_name))
+                        lesson_pdf_url = self.course_page_url + self.course + r'#/learn/content?type=detail&id=' + single_lesson[0] + r'&cid=' + single_pdf[2]
+                        file.write('　　 %s   %s\n' % (pdf_name,lesson_pdf_url))
                         item['pdf_name'] = pdf_name
                         param = {
                             "type": single_pdf[1],
