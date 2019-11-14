@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="43fff0c0-4d8a-455a-a2ea-bb717f7fd69f" name="Default" comment="">
+    <list default="true" id="43fff0c0-4d8a-455a-a2ea-bb717f7fd69f" name="Default" comment="更改gitignore">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
@@ -162,7 +162,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1558591634230</updated>
-      <workItem from="1573715975447" duration="1899000" />
+      <workItem from="1573715975447" duration="2205000" />
     </task>
     <task id="LOCAL-00001" summary="添加pc的更改">
       <created>1572676254224</created>
@@ -241,7 +241,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572912176157</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="更改gitignore">
+      <created>1573719474624</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1573719474624</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TodoView">
@@ -256,6 +263,16 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
@@ -269,13 +286,13 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="添加pc的更改" />
-    <MESSAGE value="更改gitignore" />
     <MESSAGE value="添加课程信息保存json功能" />
     <MESSAGE value="可以识别多个教师的课程" />
     <MESSAGE value="更改下载路径，支持相对与绝对" />
     <MESSAGE value="增加视频质量选择" />
     <MESSAGE value="更改目录保存方法" />
-    <option name="LAST_COMMIT_MESSAGE" value="更改目录保存方法" />
+    <MESSAGE value="更改gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="更改gitignore" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
