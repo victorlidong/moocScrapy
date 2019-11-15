@@ -27,6 +27,7 @@ class MoocSpider(scrapy.Spider):
         course_name = re.findall(course_name_compile, content)[0]
         tmp_download_url = getDownloadUrl()
 
+        #downloadurl 判断与设置
         if tmp_download_url.endswith('\\') == False and tmp_download_url != '':
             tmp_download_url = tmp_download_url + '\\'
         course_name = re.sub(r'[\\/:\*\?"<>\|：]', '', course_name)
@@ -75,7 +76,7 @@ class MoocSpider(scrapy.Spider):
             tmpdict = dict([('lectorName', info[0]), ('lectorTitle', info[1])])
             tmplist.append(tmpdict)
         c_item['course_other_teacher'] = tmplist
-        # TODO 需要增加错误判断，没有考虑正则匹配失败的情况
+
 
         c_item['course_teacher_title'] = teacher_lectorTitle
         c_item['course_teacher'] = teacher_name
@@ -260,6 +261,7 @@ class MoocSpider(scrapy.Spider):
         quality = int(VIDEO_TYPE)  # 视频质量默认最低，以后可以改
         quality_len = len(dict_data['result']['videos'])
         if quality > quality_len:
+            print('该清晰的视频不存在，使用最相近的清晰度视频')
             quality = quality_len
         video_download_dict = dict_data['result']['videos'][quality - 1]
         item['video_url'] = video_download_dict['videoUrl']
