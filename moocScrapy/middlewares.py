@@ -6,8 +6,8 @@
 # https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
-
-
+from fake_useragent import UserAgent
+import random
 class MoocscrapySpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the spider middleware does not modify the
@@ -106,5 +106,7 @@ class MoocscrapyDownloaderMiddleware(object):
 class RandomUserAgent(object):
     def process_request(self, request, spider):
         # TODO 使用随机agent可以提高效率
-        request.headers['User-Agent'] = 'Mozilla/5.0'
+        ua = UserAgent()
+        s=ua.random
+        request.headers['User-Agent'] = s
         # print(request.headers)
