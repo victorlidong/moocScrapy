@@ -28,10 +28,10 @@ class MoocSpider(scrapy.Spider):
         tmp_download_url = getDownloadUrl()
 
         #downloadurl 判断与设置
-        if tmp_download_url.endswith('\\') == False and tmp_download_url != '':
-            tmp_download_url = tmp_download_url + '\\'
+        if tmp_download_url.endswith('/') == False and tmp_download_url != '':
+            tmp_download_url = tmp_download_url + '/'
         course_name = re.sub(r'[\\/:\*\?"<>\|：]', '', course_name)
-        tmp_download_url = tmp_download_url + 'data\\' + course_name + '\\'
+        tmp_download_url = tmp_download_url + 'data/' + course_name + '/'
 
         if not os.path.isdir(tmp_download_url):
             os.makedirs(tmp_download_url)
@@ -219,10 +219,10 @@ class MoocSpider(scrapy.Spider):
         name = re.sub(file_pattern_compile, '', name)
         # 检查是否有重名的（即已经下载过的）
         tmp_download_url = getDownloadUrl()
-        if os.path.exists(tmp_download_url + 'PDFs\\' + name + '.pdf'):
+        if os.path.exists(tmp_download_url + 'PDFs/' + name + '.pdf'):
             print(name + "------------->已下载")
             return (None, None)
-        if os.path.exists(tmp_download_url + 'Videos\\' + name + '.mp4'):
+        if os.path.exists(tmp_download_url + 'Videos/' + name + '.mp4'):
             print(name + "------------->已下载")
             return (None, None)
 
@@ -277,10 +277,10 @@ class MoocSpider(scrapy.Spider):
         name = re.sub(file_pattern_compile, '', name)
         # 检查是否有重名的（即已经下载过的）
         tmp_download_url = getDownloadUrl()
-        if os.path.exists(tmp_download_url + 'PDFs\\' + name + '.pdf'):
+        if os.path.exists(tmp_download_url + 'PDFs/' + name + '.pdf'):
             print(name + "------------->已下载")
             return None
-        if os.path.exists(tmp_download_url + 'Videos\\' + name + '.mp4'):
+        if os.path.exists(tmp_download_url + 'Videos/' + name + '.mp4'):
             print(name + "------------->已下载")
             return None
         post_data = {

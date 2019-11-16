@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="43fff0c0-4d8a-455a-a2ea-bb717f7fd69f" name="Default" comment="更改gitignore">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/moocScrapy.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/moocScrapy.iml" afterDir="false" />
+    <list default="true" id="43fff0c0-4d8a-455a-a2ea-bb717f7fd69f" name="Default" comment="更新requirements">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/moocScrapy/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/moocScrapy/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/moocScrapy/pipelines.py" beforeDir="false" afterPath="$PROJECT_DIR$/moocScrapy/pipelines.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/moocScrapy/spiders/mooc.py" beforeDir="false" afterPath="$PROJECT_DIR$/moocScrapy/spiders/mooc.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,35 +33,6 @@
         <option value="Python Script" />
       </list>
     </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find />
-      <find>single_content[1]</find>
-      <find>count_num</find>
-      <find>Link</find>
-      <find>pdf_url</find>
-      <find>1005355456</find>
-      <find>pdf</find>
-      <find>1005355446</find>
-      <find>正在下载</find>
-      <find>助教的Tensorflow笔记</find>
-      <find>mooc-video/nos/mp4/2018/12/10/1010860782_fa18e109400b43079e0f212644adec52_sd.mp4</find>
-      <find>1010860782_fa18e109400b43079e0f212644adec52_sd.mp4</find>
-      <find>1.5</find>
-      <find>sub</find>
-      <find>https://jdvodrvfb210d.vod.126.net/jdvodrvfb210d/nos/mp4/2019/01/23/1214242371_ca6833889dbc43e0851471f50a37f019_sd.mp4</find>
-      <find>MongoPipeline</find>
-      <find>get_course_info</find>
-      <find>MoocscrapyPipeline</find>
-      <find>p</find>
-      <find>print</find>
-      <find>meta_data</find>
-      <find>目</find>
-      <find>目录</find>
-      <find>DOWNLOAD_UEL</find>
-      <find>log</find>
-    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="ROOT_SYNC" value="DONT_SYNC" />
@@ -166,7 +135,7 @@
       <option name="presentableId" value="Default" />
       <updated>1558591634230</updated>
       <workItem from="1573715975447" duration="2205000" />
-      <workItem from="1573887177541" duration="166000" />
+      <workItem from="1573887177541" duration="1009000" />
     </task>
     <task id="LOCAL-00001" summary="添加pc的更改">
       <created>1572676254224</created>
@@ -252,7 +221,14 @@
       <option name="project" value="LOCAL" />
       <updated>1573719474624</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="更新requirements">
+      <created>1573887363757</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1573887363757</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TodoView">
@@ -298,16 +274,12 @@
     <MESSAGE value="增加视频质量选择" />
     <MESSAGE value="更改目录保存方法" />
     <MESSAGE value="更改gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="更改gitignore" />
+    <MESSAGE value="更新requirements" />
+    <option name="LAST_COMMIT_MESSAGE" value="更新requirements" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/moocScrapy/spiders/mooc.py</url>
-          <line>33</line>
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/moocScrapy/spiders/mooc.py</url>
           <line>264</line>
@@ -333,6 +305,16 @@
           <line>189</line>
           <option name="timeStamp" value="22" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/moocScrapy/spiders/mooc.py</url>
+          <line>39</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/moocScrapy/spiders/mooc.py</url>
+          <line>30</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
@@ -350,7 +332,7 @@
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/moocScrapy$run.coverage" NAME="run Coverage Results" MODIFIED="1573716150102" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/moocScrapy$run.coverage" NAME="run Coverage Results" MODIFIED="1573888053342" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
