@@ -15,7 +15,6 @@
 #DOWNLOAD_URL = r""
 DOWNLOAD_URL = input("请输入保存路径：")
 course_url = input("输入你想爬取的课程链接：")
-input()
 print("输入下载的视频质量（1-3）：")
 VIDEO_TYPE =input() #1 #(1-3)
 print("VIDEO_TYPE = ",VIDEO_TYPE)
