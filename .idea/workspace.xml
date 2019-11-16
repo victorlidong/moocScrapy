@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="43fff0c0-4d8a-455a-a2ea-bb717f7fd69f" name="Default" comment="更新requirements">
+    <list default="true" id="43fff0c0-4d8a-455a-a2ea-bb717f7fd69f" name="Default" comment="更改使之适配ubuntu">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/moocScrapy/pipelines.py" beforeDir="false" afterPath="$PROJECT_DIR$/moocScrapy/pipelines.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/moocScrapy/spiders/mooc.py" beforeDir="false" afterPath="$PROJECT_DIR$/moocScrapy/spiders/mooc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -135,7 +134,8 @@
       <option name="presentableId" value="Default" />
       <updated>1558591634230</updated>
       <workItem from="1573715975447" duration="2205000" />
-      <workItem from="1573887177541" duration="1009000" />
+      <workItem from="1573887177541" duration="1713000" />
+      <workItem from="1573888927880" duration="960000" />
     </task>
     <task id="LOCAL-00001" summary="添加pc的更改">
       <created>1572676254224</created>
@@ -228,7 +228,14 @@
       <option name="project" value="LOCAL" />
       <updated>1573887363757</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="更改使之适配ubuntu">
+      <created>1573888206343</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1573888206343</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TodoView">
@@ -275,7 +282,8 @@
     <MESSAGE value="更改目录保存方法" />
     <MESSAGE value="更改gitignore" />
     <MESSAGE value="更新requirements" />
-    <option name="LAST_COMMIT_MESSAGE" value="更新requirements" />
+    <MESSAGE value="更改使之适配ubuntu" />
+    <option name="LAST_COMMIT_MESSAGE" value="更改使之适配ubuntu" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -332,7 +340,7 @@
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/moocScrapy$run.coverage" NAME="run Coverage Results" MODIFIED="1573888053342" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/moocScrapy$run.coverage" NAME="run Coverage Results" MODIFIED="1573888931784" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">

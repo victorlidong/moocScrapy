@@ -1,5 +1,5 @@
 # _*_ encoding:utf-8 _*_
-# _*_ author:wen _*_
+
 
 
 from scrapy.cmdline import execute
