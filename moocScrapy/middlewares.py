@@ -1,54 +1,44 @@
 # -*- coding: utf-8 -*-
-
-# Define here the models for your spider middleware
-#
-# See documentation in:
-# https://doc.scrapy.org/en/latest/topics/spider-middleware.html
+"""
+定义Spider的中间件
+"""
 
 from scrapy import signals
 from fake_useragent import UserAgent
-import random
+
+
 class MoocscrapySpiderMiddleware(object):
-    # Not all methods need to be defined. If a method is not defined,
-    # scrapy acts as if the spider middleware does not modify the
-    # passed objects.
 
     @classmethod
     def from_crawler(cls, crawler):
-        # This method is used by Scrapy to create your spiders.
+        # Scrapy使用此方法创建Spider
         s = cls()
         crawler.signals.connect(s.spider_opened, signal=signals.spider_opened)
         return s
 
     def process_spider_input(self, response, spider):
-        # Called for each response that goes through the spider
-        # middleware and into the spider.
-
-        # Should return None or raise an exception.
+        # 每一个response都需要经过spider中间件进入Spider
+        # 返回None或引发异常
         return None
 
     def process_spider_output(self, response, result, spider):
-        # Called with the results returned from the Spider, after
-        # it has processed the response.
-
-        # Must return an iterable of Request, dict or Item objects.
+        # 在处理完响应后，调用Spider返回的结果
+        # 必须返回一个可迭代的Request，dict或Item对象
         for i in result:
             yield i
 
     def process_spider_exception(self, response, exception, spider):
-        # Called when a spider or process_spider_input() method
-        # (from other spider middleware) raises an exception.
+        # 当Spider或process_spider_input（）方法（来自其他Spider中间件）
+        # 引发异常时调用。
 
-        # Should return either None or an iterable of Response, dict
-        # or Item objects.
+        # 应该返回None或可迭代的Response，dict或Item对象
         pass
 
     def process_start_requests(self, start_requests, spider):
-        # Called with the start requests of the spider, and works
-        # similarly to the process_spider_output() method, except
-        # that it doesn’t have a response associated.
+        # 以Spider的启动请求进行调用，其工作原理与process_spider_output（）
+        # 方法类似，不同之处在于它没有关联的响应
 
-        # Must return only requests (not items).
+        # 必须仅返回请求（不返回项目）
         for r in start_requests:
             yield r
 
@@ -57,46 +47,40 @@ class MoocscrapySpiderMiddleware(object):
 
 
 class MoocscrapyDownloaderMiddleware(object):
-    # Not all methods need to be defined. If a method is not defined,
-    # scrapy acts as if the downloader middleware does not modify the
-    # passed objects.
 
     @classmethod
     def from_crawler(cls, crawler):
-        # This method is used by Scrapy to create your spiders.
+        # Scrapy使用此方法创建Spider
         s = cls()
         crawler.signals.connect(s.spider_opened, signal=signals.spider_opened)
         return s
 
     def process_request(self, request, spider):
-        # Called for each request that goes through the downloader
-        # middleware.
+        # 调用通过下载器中间件的每个请求
 
-        # Must either:
-        # - return None: continue processing this request
-        # - or return a Response object
-        # - or return a Request object
-        # - or raise IgnoreRequest: process_exception() methods of
-        #   installed downloader middleware will be called
+        # 满足以下一个：
+        # - return None: 继续处理此请求
+        # - return一个Response对象
+        # - return一个Request对象
+        # - 引发IgnoreRequest：已安装的下载程序中间件的process_exception（）方法将被调用
         return None
 
     def process_response(self, request, response, spider):
-        # Called with the response returned from the downloader.
+        # 调用下载器返回的响应
 
-        # Must either;
-        # - return a Response object
-        # - return a Request object
-        # - or raise IgnoreRequest
+        # 满足以下一个：
+        # - return一个Response对象
+        # - return一个Request对象
+        # - 引发IgnoreRequest
         return response
 
     def process_exception(self, request, exception, spider):
-        # Called when a download handler or a process_request()
-        # (from other downloader middleware) raises an exception.
+        # 当下载处理程序或process_request（）（来自其他下载器中间件）引发异常时调用
 
-        # Must either:
-        # - return None: continue processing this exception
-        # - return a Response object: stops process_exception() chain
-        # - return a Request object: stops process_exception() chain
+        # 满足以下一个：
+        # - return None: 继续处理此异常
+        # - return一个Response对象: 停止process_exception()链
+        # - return一个Request object:停止process_exception()链
         pass
 
     def spider_opened(self, spider):
@@ -104,9 +88,10 @@ class MoocscrapyDownloaderMiddleware(object):
 
 
 class RandomUserAgent(object):
+
     def process_request(self, request, spider):
         # TODO 使用随机agent可以提高效率
         ua = UserAgent()
-        s=ua.random
+        s = ua.random
         request.headers['User-Agent'] = s
         # print(request.headers)

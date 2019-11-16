@@ -3,6 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="43fff0c0-4d8a-455a-a2ea-bb717f7fd69f" name="Default" comment="更改使之适配ubuntu">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/moocScrapy/download_mp4.py" beforeDir="false" afterPath="$PROJECT_DIR$/moocScrapy/download_mp4.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/moocScrapy/items.py" beforeDir="false" afterPath="$PROJECT_DIR$/moocScrapy/items.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/moocScrapy/middlewares.py" beforeDir="false" afterPath="$PROJECT_DIR$/moocScrapy/middlewares.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/moocScrapy/pipelines.py" beforeDir="false" afterPath="$PROJECT_DIR$/moocScrapy/pipelines.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/moocScrapy/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/moocScrapy/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/moocScrapy/spiders/mooc.py" beforeDir="false" afterPath="$PROJECT_DIR$/moocScrapy/spiders/mooc.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -43,7 +49,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Documents/WeChat Files/ld870116/FileStorage/File/2019-11/moocScrapy(2)" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -135,7 +141,8 @@
       <updated>1558591634230</updated>
       <workItem from="1573715975447" duration="2205000" />
       <workItem from="1573887177541" duration="1713000" />
-      <workItem from="1573888927880" duration="960000" />
+      <workItem from="1573888927880" duration="6380000" />
+      <workItem from="1573907394589" duration="2225000" />
     </task>
     <task id="LOCAL-00001" summary="添加pc的更改">
       <created>1572676254224</created>
@@ -235,7 +242,14 @@
       <option name="project" value="LOCAL" />
       <updated>1573888206343</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="更改使之适配ubuntu">
+      <created>1573894012857</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1573894012857</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TodoView">
@@ -290,38 +304,18 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/moocScrapy/spiders/mooc.py</url>
-          <line>264</line>
+          <line>269</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/moocScrapy/spiders/mooc.py</url>
-          <line>263</line>
+          <line>268</line>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/moocScrapy/spiders/mooc.py</url>
-          <line>259</line>
+          <line>264</line>
           <option name="timeStamp" value="19" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/moocScrapy/spiders/mooc.py</url>
-          <line>166</line>
-          <option name="timeStamp" value="20" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/moocScrapy/spiders/mooc.py</url>
-          <line>189</line>
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/moocScrapy/spiders/mooc.py</url>
-          <line>39</line>
-          <option name="timeStamp" value="24" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/moocScrapy/spiders/mooc.py</url>
-          <line>30</line>
-          <option name="timeStamp" value="25" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -340,7 +334,7 @@
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/moocScrapy$run.coverage" NAME="run Coverage Results" MODIFIED="1573888931784" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/moocScrapy$run.coverage" NAME="run Coverage Results" MODIFIED="1573909626814" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">

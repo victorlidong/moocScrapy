@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-# Define your item pipelines here
-#
-# Don't forget to add your pipeline to the ITEM_PIPELINES setting
-# See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-import urllib.request
+"""
+定义项目管道
+"""
 
+
+import urllib.request
 import m3u8
 from glob import iglob
 from natsort import natsorted
@@ -12,7 +12,6 @@ from urllib.parse import urljoin
 from concurrent.futures import ThreadPoolExecutor
 from moocScrapy.spiders.mooc import *
 from moocScrapy.download_mp4 import downloader
-import random
 from fake_useragent import UserAgent
 
 
